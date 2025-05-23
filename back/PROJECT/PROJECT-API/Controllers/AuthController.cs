@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PROJECT.Application.Services;
 using PROJECT.Domain.Entities;
@@ -21,6 +22,7 @@ namespace PROJECT_API.Controllers
             _tokenService = tokenService;
         }
 
+        [AllowAnonymous]
         [HttpPost("account")]
         public async Task<IActionResult> Register(UserRegisterModel model)
         {
@@ -40,6 +42,7 @@ namespace PROJECT_API.Controllers
             return Ok("User created");
         }
 
+        [AllowAnonymous]
         [HttpPost("token")]
         public async Task<IActionResult> Login(UserLoginModel model)
         {
