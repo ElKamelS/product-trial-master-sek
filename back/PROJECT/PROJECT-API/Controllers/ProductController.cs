@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using PROJECT.Application.Interfaces;
 using PROJECT.Domain.Entities;
+using System.Security.Claims;
 
 namespace PROJECT_API.Controllers
 {
     [ApiController]
     [Route("products")]
+    [Authorize]
     public class ProductController(IProductService service) : ControllerBase
     {
         #region path: /products
@@ -17,6 +20,10 @@ namespace PROJECT_API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            if (userEmail != "admin@admin.com")
+                return Forbid("Only admin can add products");
+
             var created = await service.CreateAsync(product);
             return CreatedAtAction(nameof(Get), new { id = created.id }, created);
         }
