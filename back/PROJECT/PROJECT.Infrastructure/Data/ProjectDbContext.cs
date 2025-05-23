@@ -16,6 +16,8 @@ namespace PROJECT.Infrastructure.Data
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(p => p.id);
+                entity.Property(p => p.InventoryStatus)
+                      .HasConversion<string>();
             });
         }
     }

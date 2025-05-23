@@ -11,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddNewtonsoftJson();
 
 builder.Services.AddDbContext<ProjectDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductDBConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductDBConnection"),
+        b => b.MigrationsAssembly("PROJECT.Infrastructure")));
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
