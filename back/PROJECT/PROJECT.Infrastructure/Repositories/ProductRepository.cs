@@ -14,12 +14,5 @@ namespace PROJECT.Infrastructure.Repositories
         {
             _context = context;
         }
-
-        public async Task<IEnumerable<Product>> GetProductsByPriceRange(decimal min, decimal max)
-        {
-            return await _context.Products
-                .Where(p => p.price >= min && p.price <= max)
-                .ToListAsync();
-        }
     }
 }

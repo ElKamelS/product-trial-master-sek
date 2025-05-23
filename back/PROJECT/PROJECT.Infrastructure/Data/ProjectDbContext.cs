@@ -9,6 +9,8 @@ namespace PROJECT.Infrastructure.Data
 
         public DbSet<Product> Products => Set<Product>();
 
+        public DbSet<User> Users => Set<User>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -19,6 +21,22 @@ namespace PROJECT.Infrastructure.Data
                 entity.Property(p => p.InventoryStatus)
                       .HasConversion<string>();
             });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(p => p.id);
+
+            });
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Cart)
+                .WithMany(p => p.UsersCart)
+                .UsingEntity(j => j.ToTable("CartProducts"));
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Wishlist)
+                .WithMany(p => p.UsersWishlist)
+                .UsingEntity(j => j.ToTable("WishlistProducts"));
         }
     }
 }

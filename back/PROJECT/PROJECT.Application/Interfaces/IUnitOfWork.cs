@@ -9,6 +9,7 @@ namespace PROJECT.Application.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IProductRepository Products { get; }
+        IUserRepository Users { get; }
 
         Task<int> SaveChangesAsync();
     }

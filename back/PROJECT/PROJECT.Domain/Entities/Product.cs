@@ -25,5 +25,8 @@ namespace PROJECT.Domain.Entities
         public int rating { get; set; }
         public int createdAt { get; set; }
         public int updatedAt { get; set; }
+
+        public ICollection<User> UsersWishlist { get; set; } = new List<User>();
+        public ICollection<User> UsersCart { get; set; } = new List<User>();
     }
 }

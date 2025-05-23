@@ -8,11 +8,13 @@ namespace PROJECT.Infrastructure.Data
         private readonly ProjectDbContext _context;
 
         public IProductRepository Products { get; }
+        public IUserRepository Users { get; }
 
         public UnitOfWork(ProjectDbContext context)
         {
             _context = context;
             Products = new ProductRepository(_context);
+            Users = new UserRepository(_context);
         }
 
         public async Task<int> SaveChangesAsync()

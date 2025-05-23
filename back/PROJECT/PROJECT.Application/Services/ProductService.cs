@@ -40,8 +40,5 @@ namespace PROJECT.Application.Services
             await unitOfWork.SaveChangesAsync();
             return true;
         }
-
-        public async Task<IEnumerable<Product>> GetByPriceRange(decimal min, decimal max)
-            => await unitOfWork.Products.GetProductsByPriceRange(min, max);
     }
 }

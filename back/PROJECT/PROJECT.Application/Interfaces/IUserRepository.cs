@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PROJECT.Application.Interfaces
 {
-    public interface IProductRepository : IRepository<Product>
+    public interface IUserRepository : IRepository<User>
     {
     }
 }
