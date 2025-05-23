@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PROJECT.Domain.Entities;
+using PROJECT.Domain.Models;
 using PROJECT.Infrastructure.Data;
 using System;
 using System.Security.Claims;
@@ -27,7 +28,14 @@ namespace PROJECT_API.Controllers
             var user = await _context.Users.Include(u => u.Cart).FirstOrDefaultAsync(u => u.email == email);
             if (user == null) return NotFound();
 
-            return Ok(user.Cart);
+            var cartItems = user.Cart.Select(p => new ProductModel
+            {
+                id = p.id,
+                name = p.name,
+                price = p.price
+            }).ToList();
+
+            return Ok(cartItems);
         }
 
         [HttpPost("{productId}")]

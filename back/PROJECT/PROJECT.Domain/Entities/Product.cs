@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PROJECT.Domain.Entities
@@ -26,7 +27,9 @@ namespace PROJECT.Domain.Entities
         public int createdAt { get; set; }
         public int updatedAt { get; set; }
 
+        //[JsonIgnore]
         public ICollection<User> UsersWishlist { get; set; } = new List<User>();
+        //[JsonIgnore]
         public ICollection<User> UsersCart { get; set; } = new List<User>();
     }
 }
